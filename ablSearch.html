@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="index.js"></script>
     <title> &#128191;&#128218;&#10084;&#65039;</title>
 
 </head>
@@ -25,21 +27,20 @@
             </ul>
         </nav>
     </header>
-
-    <div class="flex-container">
-        <div class="about-flex-child1">
-            <img class="aboutimage" src="Images/booksheadphones.jpg" alt="Image of person using a phone with headphones plugged in.">
-        </div>
-        <div class="about-flex-child2">
-            <article>
-                <h2 style="color: #BF8AAD;">About ABL</h2>
-                <p>AudioBook.Love grew out of the constant frustration and time spent trying to locate an audiobook to listen to. The creator is a former librarian, current tech person, and avid reader and listener of audiobooks. However, finding where an audiobook is available takes time, energy, and potentially money.</p>
-                <br>                
-                <p>To find a way to make this process much easier, AudioBook.Love was born. We want to make that search easier, faster, and as painless as possible so that you can continue what you love; reading/listening! </p>
-                <button class="button" onclick="window.location.href='ablContact.html';">CONTACT US</button>
-            </article>
-        </div>
-    </div>
+    
+    <article style="text-align: center;">  
+        <div class="search-container">
+            <h3 style="color: #BF8AAD;">Search Results </h3>
+            <p>Use the search box to search for an audiobook by title, author, or ISBN.</p>
+            <form action="/action_page.php">
+              <input type="text" placeholder="Search" name="search">
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+            <br>
+            <h3>The above search box will be connected to the <a href="https://openlibrary.org/developers"> Open Library API</a> to search and display book search results on this page.</h3>
+          </div>
+          <p>After an item is selected, they will be taken to a page that displays information about that selection and where they can listen to it. Here is an example of what that page will look like: <a href="ablItem.html"> The Hobbit</a>. </p>
+    </article>
 
     <footer>
         <p>AudioBook.Love | Tamia Taylor-Bader | May 2023</p>
