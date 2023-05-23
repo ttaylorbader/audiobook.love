@@ -1,2 +1,2 @@
-# audiobooks.love
+# audiobook.love
 Audiobook Search Aggregator
