@@ -25,6 +25,11 @@ header img {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.logo:active {
+    box-shadow: 0 5px #555555;
+    transform: translateY(4px);
+  }
+
 nav {
     -webkit-flex: 1;
     -ms-flex: 1;
@@ -50,6 +55,11 @@ nav li a {
 
 nav li a:last-child {
     margin-right: 25px;
+}
+
+.active {
+    color: #BF8AAD;
+    font-weight: bold;
 }
 
 /* Homepage body content */
@@ -333,3 +343,67 @@ hr {
     }
     
 }
+
+@media (max-width: 480px) {
+    
+    header {
+        padding: 5px;
+        text-align: center;
+        font-size: 16px;
+        color: white;
+    }
+    
+    header img {
+        margin-left: 5px;
+        float: left;
+        max-width: 65px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    
+    nav {
+        -webkit-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        vertical-align: center;
+        margin-top: 5px;
+    }
+    
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    nav li {
+        display: inline-flex;
+    }
+    
+    nav li a {
+        text-decoration: none;
+        color: black;
+    }
+    
+    nav li a:last-child {
+        margin-right: 0px;
+    }
+
+    .flex-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        background-color: #f1f1f1;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer {
+        background-color: #BF8AAD;
+        padding: 10px;
+        text-align: center;
+        color: white;
+        line-height: 0.5em;
+        width: 100%;
+    }
+    
+  }
