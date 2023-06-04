@@ -80,31 +80,34 @@
                                                 <p>Author(s): ${authors}</p>
                                                 <p>ISBN: ${isbn}</p>
                                                 <button class="book-details-button" data-title="${title}" data-author="${authors}" data-isbn="${isbn}" data-thumbnail="${thumbnail}">View Details</button>
-                                            </div>
-                                            <hr>
-                                        `;
-                                        $("#searchResults").append(bookDetailsHtml);
-                                    });
-        
-                                    $(".book-details-button").click(function() {
-                                        const title = $(this).data("title");
-                                        const authors = $(this).data("author");
-                                        const isbn = $(this).data("isbn");
-                                        const thumbnail = $(this).data("thumbnail");
-        
-                                        window.location.href = `item.html?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authors)}&isbn=${encodeURIComponent(isbn)}&thumbnail=${encodeURIComponent(thumbnail)}`;
-                                    });
-                                } else {
-                                    $("#searchResults").html("No results found.");
-                                }
-                            },
-                            error: function() {
-                                $("#searchResults").html("Error occurred while fetching search results.");
-                            }
-                        });
+                                    </div>
+                                    <hr>
+                                `;
+                                $("#searchResults").append(bookDetailsHtml);
+                            });
+
+                            $(".book-details-button").click(function() {
+                                const title = $(this).data("title");
+                                const authors = $(this).data("author");
+                                const isbn = $(this).data("isbn");
+                                const thumbnail = $(this).data("thumbnail");
+
+                                window.location.href = `item.html?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authors)}&isbn=${encodeURIComponent(isbn)}&thumbnail=${encodeURIComponent(thumbnail)}`;
+                            });
+
+                        } else {
+
+                            $("#searchResults").html("No results found.");
+                        }
+                    },
+                    error: function() {
+                        $("#searchResults").html("Error occurred while fetching search results.");
                     }
                 });
-            </script>
+            }
+        });
+    </script>
+    
         </article>
 
     <footer>
