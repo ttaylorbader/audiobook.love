@@ -287,7 +287,7 @@ form p {
 
 /* Item Space Content */
 
-.book-cover {
+#book-cover {
     margin: 25px;
     width: auto;
     max-height: 300px;
@@ -305,7 +305,7 @@ form p {
     margin-bottom: 10px;
 }
 
-#book-details-button, #backToSearchResults, #backToSearchPage:hover {
+#book-details-button:hover, #backToSearchResults:hover, #backToSearchPage:hover {
     background-color: #BF8AAD;
     color: white;
 }
