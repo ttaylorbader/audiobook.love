@@ -320,6 +320,10 @@ form p {
     color: white;
 }
 
+.backButtonCenter {
+    display: flexbox;
+}
+
 .book-details {
     display: flex;
     flex-direction: column;
