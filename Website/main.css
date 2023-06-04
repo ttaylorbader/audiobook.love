@@ -294,7 +294,7 @@ form p {
 }
 
 #book-details-button, #backToSearchResults, #backToSearchPage {
-    float: none;
+    float: right;
     padding: 6px 10px;
     margin-top: 8px;
     margin-left: auto;
@@ -302,7 +302,7 @@ form p {
     background: #ddd;
     font-size: 16px;
     border: none;
-    width: 35px;
+    margin-bottom: 10px;
 }
 
 #book-details-button, #backToSearchResults, #backToSearchPage:hover {
