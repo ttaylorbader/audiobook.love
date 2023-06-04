@@ -294,7 +294,7 @@ form p {
 }
 
 #book-details-button, #backToSearchResults, #backToSearchPage {
-    float: right;
+    float: none;
     padding: 6px 10px;
     margin-top: 8px;
     margin-left: auto;
