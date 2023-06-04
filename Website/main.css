@@ -293,7 +293,7 @@ form p {
     max-height: 300px;
 }
 
-.book-details-button {
+.book-details-button, .backToSearchResults, .BackToSearchPage {
     float: none;
     padding: 6px 10px;
     margin-top: 8px;
@@ -304,7 +304,7 @@ form p {
     border: none;
 }
 
-.book-details-button:hover {
+.book-details-button, .backToSearchResults, .BackToSearchPage:hover {
     background-color: #BF8AAD;
     color: white;
 }
