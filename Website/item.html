@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title> &#128191;&#128218;&#10084;&#65039;</title>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -33,25 +34,41 @@
         </nav>
     </header>
 
-    <div class="flex-container">    
-        <div class="item-flex-child1">
-            <img class="bookcover" src="Images/TheHobbitCover.jpg" alt="J.R.R. Tolkien's the Hobbit book cover.">
-        </div>
-        <div class="item-flex-child2">
-            <article class="itemarticle">
-                <h4>Title: The Hobbit: or, There and Back Again </h4>
-                <h4>Author: J.R.R. Tolkien</h4>
-                <h4>ISBN: 978-0547928227 </h4>
-                <p>Summary: Unbeknown to Bilbo Baggins, a quiet comfort-loving Hobbit from the Shire, many adventures are about to befall him. He, the wizard Gandalf, and a company of dwarves were to set out on a dangerous quest to reclaim stolen treasure from the lair of a dragon, Smaug, and thus fulfill the prophecies of the old songs.</p>
-                <hr>
-                <h4>Available Audiobook Sources:</h4>
-                <ul>
-                    <li>Amazon</li>
-                    <li>Audible</li>
-                </ul>
-            </article>
-        </div>
+    <h2 style="text-align: center; margin-top: 10px;">Audiobook Details</h2>
+
+    <div class="flex-container">
+        <div id="bookDetails"></div>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const title = urlParams.get("title");
+            const author = urlParams.get("author");
+            const isbn = urlParams.get("isbn");
+            const openLibraryUrl = urlParams.get("openLibraryUrl");
+            const coverUrl = urlParams.get("coverUrl");
+
+            displayBookDetails(title, author, isbn, openLibraryUrl, coverUrl);
+
+            function displayBookDetails(title, author, isbn, openLibraryUrl, coverUrl) {
+                const bookDetailsHtml = `
+                <div class="book-details">
+                    <div class="item-flex-child1">
+                        <img class="book-cover" src="${coverUrl}" alt="Book Cover">
+                    </div>
+                    <div class="item-flex-child2">
+                        <h3>Title: ${title}</h3>
+                        <p>Author: ${author}</p>
+                        <p>ISBN: ${isbn}</p>
+                        <p><a href="${openLibraryUrl}" target="_blank">View on Open Library</a></p>
+                    </div>
+                </div>
+                `;
+                $("#bookDetails").html(bookDetailsHtml);
+            }
+        });
+    </script>
 
     <footer>
         <p>AudioBook.Love | Tamia Taylor-Bader | May 2023</p>

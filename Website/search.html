@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title> &#128191;&#128218;&#10084;&#65039;</title>
 </head>
 <!-- Google tag (gtag.js) -->
@@ -38,16 +39,64 @@
     <article style="text-align: center;">  
         <div class="search-container">
             <h3 style="color: #BF8AAD;">Search Results </h3>
-            <p>Use the search box to search for an audiobook by title, author, or ISBN.</p>
-            <form action="/action_page.php">
-              <input type="text" placeholder="Search" name="search">
+            <p>Use the search box to search for an audiobook by Title, Author, or ISBN.</p>
+            <form id="searchForm" action="" method="GET">
+                <input type="text" name="query" id="query" placeholder="Enter an Audiobook Title, Author, or ISBN">
               <button type="submit"><i class="fa fa-search"></i></button>
             </form>
             <br>
-            <h3>The above search box will be connected to the <a href="https://openlibrary.org/developers"> Open Library API</a> to search and display book search results on this page.</h3>
-          </div>
-          <p>After an item is selected, they will be taken to a page that displays information about that selection and where they can listen to it. Here is an example of what that page will look like: <a href="item.html"> The Hobbit</a>. </p>
-    </article>
+            <div id="results"></div>
+            <script>
+                $(document).ready(function() {
+                    $("#searchForm").on("submit", function(e) {
+                        e.preventDefault();
+                        const query = $("#query").val().trim();
+                        searchAudiobook(query);
+                    });
+        
+                    function searchAudiobook(query) {
+                        const resultUrl = `item.html?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&isbn=${encodeURIComponent(isbn)}&openLibraryUrl=${encodeURIComponent(url)}&coverUrl=${encodeURIComponent(coverUrl)}`;
+                        
+                        window.location.href = resultUrl;
+
+                        $.ajax({
+                            url: url,
+                            method: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                if (data.docs && data.docs.length > 0) {
+                                    let resultsHtml = "";
+                                    data.docs.forEach(doc => {
+                                        const title = doc.title || "N/A";
+                                        const author = doc.author_name && doc.author_name[0] ? doc.author_name[0] : "N/A";
+                                        const isbn = doc.isbn && doc.isbn[0] ? doc.isbn[0] : "N/A";
+                                        const url = doc.key ? `item.html?key=${doc.key}` : "#";
+                                        const coverUrl = doc.cover_i ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg` : "no-image.png";
+                                        resultsHtml += `
+                                            <a class="book-result" href="${url}">
+                                                <img class="book-cover" src="${coverUrl}" alt="Book Cover">
+                                                <div>
+                                                    <h3>Title: ${title}</h3>
+                                                    <p>Author: ${author}</p>
+                                                    <p>ISBN: ${isbn}</p>
+                                                </div>
+                                            </a>
+                                            <hr> 
+                                        `;
+                                    });
+                                    $("#results").html(resultsHtml);
+                                } else {
+                                    $("#results").html("No audiobooks found.");
+                                }
+                            },
+                            error: function() {
+                                $("#results").html("Error occurred while searching for audiobooks.");
+                            }
+                        });
+                    }
+                });
+            </script>
+        </article>
 
     <footer>
         <p>AudioBook.Love | Tamia Taylor-Bader | May 2023</p>

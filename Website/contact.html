@@ -40,7 +40,7 @@
 </article>
 
     <div>
-        <form action="/action_page.php" method="post">
+        <form action="mailto:tamia.taylor-bader@du.edu" method="POST" enctype="text/plain" name="ContactForm">
             <p>
                 <input type="text" id="fname" name="firstname" placeholder="First Name">
             </p>
@@ -52,6 +52,7 @@
             </p>
             <p>
                 <select id="topic" name="topic">
+                    <option value="" disabled selected hidden>Select a Message Topic</option>
                     <option value="feedback">Feedback</option>
                     <option value="suggestion">Suggestion</option>
                     <option value="bug">Error/Bug</option>
@@ -62,7 +63,10 @@
                 <textarea id="message" name="message" placeholder="Message" style="height:200px"></textarea>
             </p>
             <p>
-                <input type="submit" value="Submit">
+                <div class="buttonalign">
+                    <input type="submit" value="Submit">
+                    <input type="reset" value="Reset">
+                </div>
             </p>
         </form>
       </div>
