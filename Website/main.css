@@ -287,8 +287,8 @@ form p {
 
 /* Item Space Content */
 
-#book-cover {
-    margin: 25px;
+.book-cover {
+    margin: 15px;
     width: auto;
     max-height: 300px;
 }
@@ -321,24 +321,26 @@ form p {
 }
 
 .backButtonCenter {
-    display: inline-block;
-    text-align: center;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    align-items: center;
 }
 
 .book-details {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
 }
 
 .item-flex-child1 {
-    flex: 30%;
+    flex: 40%;
     height: auto;
 }
   
 .item-flex-child2 {
-    flex: 70%;
+    flex: 60%;
     height: auto;
     margin-right: 0
 }

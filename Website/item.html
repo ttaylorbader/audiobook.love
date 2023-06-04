@@ -36,9 +36,7 @@
 
     <h2 style="text-align: center; margin-top: 10px;">Audiobook Details</h2>
 
-    <div class="flex-container">
-        <div id="bookDetails"></div>
-    </div>
+    <div id="bookDetails"></div>
     <div class="backButtonCenter">
         <button id="backToSearchResults">Back to Search Results</button>
         <button id="backToSearchPage">Back to Search Page</button>
@@ -54,9 +52,9 @@
             const thumbnail = decodeURIComponent(urlParams.get("thumbnail"));
 
         const bookDetailsHtml = `
-            <div class="book-details">
+            <div class="flex-container">
                 <div class="item-flex-child1">
-                    <img src="${thumbnail}" alt="Book Cover" class="book-cover" width="200">
+                    <img src="${thumbnail}" alt="Book Cover" class="book-cover">
                 </div>
                 <div class="item-flex-child2">
                     <h2>Title: ${title}</h2>
