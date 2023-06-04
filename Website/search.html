@@ -41,56 +41,64 @@
             <h3 style="color: #BF8AAD;">Search Results </h3>
             <p>Use the search box to search for an audiobook by Title, Author, or ISBN.</p>
             <form id="searchForm" action="" method="GET">
-                <input type="text" name="query" id="query" placeholder="Enter an Audiobook Title, Author, or ISBN">
+                <input type="text" id="searchInput" placeholder="Enter an Audiobook Title, Author, or ISBN">
               <button type="submit"><i class="fa fa-search"></i></button>
             </form>
+            </div>
             <br>
-            <div id="results"></div>
+            <div id="searchResults"></div>
+
             <script>
                 $(document).ready(function() {
-                    $("#searchForm").on("submit", function(e) {
-                        e.preventDefault();
-                        const query = $("#query").val().trim();
-                        searchAudiobook(query);
+                    $("#searchForm").submit(function(event) {
+                        event.preventDefault();         
+                        const searchQuery = $("#searchInput").val();        
+                        searchBooks(searchQuery);
                     });
         
-                    function searchAudiobook(query) {
-                        const resultUrl = `item.html?title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&isbn=${encodeURIComponent(isbn)}&openLibraryUrl=${encodeURIComponent(url)}&coverUrl=${encodeURIComponent(coverUrl)}`;
-                        
-                        window.location.href = resultUrl;
-
+                    function searchBooks(searchQuery) {
+                        $("#searchResults").empty();
+        
+                        const apiKey = "AIzaSyCJ2alUMQcODtDbxK3bBh0nH5ha690dATA";
+        
                         $.ajax({
-                            url: url,
+                            url: `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(searchQuery)}&key=${apiKey}`,
                             method: "GET",
                             dataType: "json",
                             success: function(data) {
-                                if (data.docs && data.docs.length > 0) {
-                                    let resultsHtml = "";
-                                    data.docs.forEach(doc => {
-                                        const title = doc.title || "N/A";
-                                        const author = doc.author_name && doc.author_name[0] ? doc.author_name[0] : "N/A";
-                                        const isbn = doc.isbn && doc.isbn[0] ? doc.isbn[0] : "N/A";
-                                        const url = doc.key ? `item.html?key=${doc.key}` : "#";
-                                        const coverUrl = doc.cover_i ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg` : "no-image.png";
-                                        resultsHtml += `
-                                            <a class="book-result" href="${url}">
-                                                <img class="book-cover" src="${coverUrl}" alt="Book Cover">
-                                                <div>
-                                                    <h3>Title: ${title}</h3>
-                                                    <p>Author: ${author}</p>
-                                                    <p>ISBN: ${isbn}</p>
-                                                </div>
-                                            </a>
-                                            <hr> 
+                                if (data.items && data.items.length > 0) {
+                                    data.items.forEach(function(item) {
+                                        const title = item.volumeInfo.title || "N/A";
+                                        const authors = item.volumeInfo.authors ? item.volumeInfo.authors.join(", ") : "N/A";
+                                        const isbn = item.volumeInfo.industryIdentifiers && item.volumeInfo.industryIdentifiers[0] ? item.volumeInfo.industryIdentifiers[0].identifier : "N/A";
+                                        const thumbnail = item.volumeInfo.imageLinks && item.volumeInfo.imageLinks.thumbnail ? item.volumeInfo.imageLinks.thumbnail : "no-image.png";
+                                        const bookDetailsHtml = `
+                                            <div>
+                                                <img src="${thumbnail}" alt="Book Cover" width="100">
+                                                <h3>Title: ${title}</h3>
+                                                <p>Author(s): ${authors}</p>
+                                                <p>ISBN: ${isbn}</p>
+                                                <button class="book-details-button" data-title="${title}" data-author="${authors}" data-isbn="${isbn}" data-thumbnail="${thumbnail}">View Details</button>
+                                            </div>
+                                            <hr>
                                         `;
+                                        $("#searchResults").append(bookDetailsHtml);
                                     });
-                                    $("#results").html(resultsHtml);
+        
+                                    $(".book-details-button").click(function() {
+                                        const title = $(this).data("title");
+                                        const authors = $(this).data("author");
+                                        const isbn = $(this).data("isbn");
+                                        const thumbnail = $(this).data("thumbnail");
+        
+                                        window.location.href = `item.html?title=${encodeURIComponent(title)}&author=${encodeURIComponent(authors)}&isbn=${encodeURIComponent(isbn)}&thumbnail=${encodeURIComponent(thumbnail)}`;
+                                    });
                                 } else {
-                                    $("#results").html("No audiobooks found.");
+                                    $("#searchResults").html("No results found.");
                                 }
                             },
                             error: function() {
-                                $("#results").html("Error occurred while searching for audiobooks.");
+                                $("#searchResults").html("Error occurred while fetching search results.");
                             }
                         });
                     }
