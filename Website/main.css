@@ -321,7 +321,8 @@ form p {
 }
 
 .backButtonCenter {
-    display: flexbox;
+    display: inline-block;
+    text-align: center;
 }
 
 .book-details {
