@@ -39,34 +39,41 @@
     <div class="flex-container">
         <div id="bookDetails"></div>
     </div>
+    <button id="backToSearchResults">Back to Search Results</button>
+    <button id="backToSearchPage">Back to Search Page</button>
 
     <script>
         $(document).ready(function() {
+            // Get the URL parameters to extract book details
             const urlParams = new URLSearchParams(window.location.search);
-            const title = urlParams.get("title");
-            const author = urlParams.get("author");
-            const isbn = urlParams.get("isbn");
-            const openLibraryUrl = urlParams.get("openLibraryUrl");
-            const coverUrl = urlParams.get("coverUrl");
+            const title = decodeURIComponent(urlParams.get("title"));
+            const authors = decodeURIComponent(urlParams.get("author"));
+            const isbn = decodeURIComponent(urlParams.get("isbn"));
+            const thumbnail = decodeURIComponent(urlParams.get("thumbnail"));
 
-            displayBookDetails(title, author, isbn, openLibraryUrl, coverUrl);
-
-            function displayBookDetails(title, author, isbn, openLibraryUrl, coverUrl) {
-                const bookDetailsHtml = `
-                <div class="book-details">
-                    <div class="item-flex-child1">
-                        <img class="book-cover" src="${coverUrl}" alt="Book Cover">
-                    </div>
-                    <div class="item-flex-child2">
-                        <h3>Title: ${title}</h3>
-                        <p>Author: ${author}</p>
-                        <p>ISBN: ${isbn}</p>
-                        <p><a href="${openLibraryUrl}" target="_blank">View on Open Library</a></p>
-                    </div>
+        const bookDetailsHtml = `
+            <div class="book-details">
+                <div class="item-flex-child1">
+                    <img src="${thumbnail}" alt="Book Cover" width="200">
                 </div>
-                `;
-                $("#bookDetails").html(bookDetailsHtml);
-            }
+                <div class="item-flex-child2">
+                    <h3>Title: ${title}</h3>
+                    <p>Author(s): ${authors}</p>
+                    <p>ISBN: ${isbn}</p>
+                    <p><a href="https://books.google.com/books?isbn=${isbn}" target="_blank">View on Google Books</a></p>
+                </div>
+            </div>
+        `;
+
+        $("#bookDetails").html(bookDetailsHtml);
+
+            $("#backToSearchResults").click(function() {
+                history.back();
+            });
+
+            $("#backToSearchPage").click(function() {
+                window.location.href = "search.html";
+            });
         });
     </script>
 
