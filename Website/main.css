@@ -280,14 +280,14 @@ form p {
     margin-bottom: 10px;
 }
 
-.book-cover {
+.searchpagebookcover {
     max-width: 200px;
     height: auto;
 }
 
 /* Item Space Content */
 
-.book-cover {
+.itempagebookcover {
     margin: 15px;
     width: auto;
     max-height: 300px;
